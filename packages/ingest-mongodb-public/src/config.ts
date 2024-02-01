@@ -14,6 +14,7 @@ import {
   AzureKeyCredential,
 } from "mongodb-rag-core";
 import { sourceConstructors } from "./sources";
+import { makeVertexAiEmbedder } from "./vertexAiEmbedder";
 
 const {
   OPENAI_ENDPOINT,
@@ -36,7 +37,10 @@ const embedder = makeOpenAiEmbedder({
 });
 
 export const standardConfig = {
-  embedder: () => embedder,
+  // TODO: add implementation
+  embedder: () => makeVertexAiEmbedder({}),
+  // TODO: note you'll need to create the appropriate atlas vector search index for the vertex ai embedding length
+
   embeddedContentStore: () =>
     makeMongoDbEmbeddedContentStore({
       connectionUri: MONGODB_CONNECTION_URI,
@@ -59,6 +63,7 @@ export const standardConfig = {
   dataSources: async () => {
     return filterFulfilled(
       await Promise.allSettled(
+        // TODO: see sources/index for more on adding the PDF sources
         sourceConstructors.map((constructor) => constructor())
       )
     )

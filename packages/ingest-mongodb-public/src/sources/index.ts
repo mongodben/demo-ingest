@@ -459,6 +459,15 @@ function getTerraformPageUrl(siteBaseUrl: string, path: string) {
   }
 }
 
+// TODO: implement logic to load content from PDF to Markdown
+// maybe use pdf.js library or something from langchain?
+export const pdfDataSource: DataSource = {
+  name: "pdf",
+  async fetchPages() {
+    return [];
+  },
+};
+
 /**
   The constructors for the sources used by the docs chatbot.
  */
@@ -469,6 +478,7 @@ export const sourceConstructors: SourceConstructor[] = [
       snootyDataApiBaseUrl: "https://snooty-data-api.mongodb.com/prod/",
     }),
   () => makeDevCenterDataSource(devCenterProjectConfig),
+  async () => pdfDataSource,
   mongoDbUniversitySourceConstructor,
   pyMongoSourceConstructor,
   mongooseSourceConstructor,
