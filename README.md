@@ -6,4 +6,4 @@ Install:
 npm install
 ```
 
-Relevant code annotated in `packages/ingest-mongodb-public` directory.
+Relevant code annotated in `packages/ingest-mongodb-public` directory with `TODO:` comments.
